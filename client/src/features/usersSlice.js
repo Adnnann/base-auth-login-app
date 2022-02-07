@@ -1,36 +1,50 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios'
-export const createUser = createAsyncThunk('user/register', (user)=>{
-  axios.post(`/user/register`,{
-    data: user,
+export const createUser = createAsyncThunk('user/registeredUser', async(user)=>{
+return await axios.post(`/user/register`,user, {
+    //body: user,
       headers:{
       'Accept':'application/json',
       'Content-Type':'application/json'
     }
   })
   .then(response=>response.data)
-  .catch(err=>console.log(err))
+  .catch(e=>e)
+  //return response.data;
 })
-export const signinUser = createAsyncThunk('auth/signin', async(userData)=>{
-  await axios.post('/auth/signin', {
+export const signinUser = createAsyncThunk('users/logedInUser', async(userData)=>{
+  const response = await axios.post('/auth/signin', {
   data: userData,
    headers:{
     'Accept':'application/json',
     'Content-Type':'application/json'
   }
 })
-.then(response=>response.data)
-.catch(err=>console.log(err))
+
+return response.data
+
 })
 
 export const signoutUser = createAsyncThunk('users/user', async()=>{
-  await axios.post('/auth/signout')
+  const response = await axios.post('/auth/signout')
+  return response.data
+})
+
+export const userPage = createAsyncThunk('users/protected', async()=>{
+  return axios.get('/protected', { 
+    headers:{
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
   .then(response=>response.data)
   .catch(err=>console.log(err))
 })
 
 const initialState = {
-  user:{}
+  registeredUser:{},
+  logedInUser:{},
+  signedOut:{},
+  userPage:{}
 };
 
 
@@ -39,11 +53,21 @@ export const usersSlice = createSlice({
   initialState,
   extraReducers: {
     [createUser.fulfilled]: (state, {payload}) => {
-      return {...state, payload}
+      return {...state, registeredUser:payload}
+    },
+    [signinUser.fulfilled]: (state, {payload}) => {
+      return {...state, logedInUser:payload}
+    },
+    [signoutUser.fulfilled]: (state, {payload}) => {
+      return {...state, signedOut:payload}
+    },
+    [userPage.fulfilled]: (state, {payload}) => {
+      return {...state, userPage:payload}
     }
   }
     
 });
 
-export const getUser = (state) => state.users.user
+export const getUser = (state) => state.users.registeredUser
+export const getUserPage = (state) => state.users.userPage
 export default usersSlice.reducer

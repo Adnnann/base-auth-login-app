@@ -3,29 +3,19 @@ import _ from 'lodash'
 import errorHandler from './helpers/dbErrorHandlers'
 
 
-  const create = async (req, res, next) => {
+  const create = (req, res, next) => {
 
-    const response =  await req.body
-   
-
-            try{
-                const user = new User(response.data)
+                const user = new User(req.body)
                 user.save((err, result) => {
                     if(err) {
-                    return res.status(400).json({error: errorHandler.getErrorMessage(err)})
+                       res.send({error: errorHandler.getErrorMessage(err)})
                     }else{
-                        return res.status(200).json({message: 'Successfuly created a new user.'})
+                        res.send({message: 'Successfuly created a new user.'})
                     }
                 })
-            }catch(err){
-                console.log(err)
             }
             
             
-       
-      
-
-}
 
 const userByID = (req, res, next, id) => {
     User.findById(id).exec((err, user) => {

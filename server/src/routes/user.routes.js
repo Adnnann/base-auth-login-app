@@ -11,14 +11,17 @@ router.route('/user/register').post(userCtrl.create)
 router.route('/user/:userId')
 .get(authCtrl.requireSignin, userCtrl.read)
 
-router
-.get('/protected', passport.authenticate('jwt', { session: false }),
+router.get('/protected', passport.authenticate('jwt', { session: false }),
     (req, res) => {
-        console.log(jwtDecode(req.cookies.userJwtToken))
-        res.sendStatus(200).json({
-            message: jwtDecode(req.cookies.userJwtToken)
-        })
-
+        console.log(req)
+        console.log(req.isAuthenticated)
+        if(req.cookies.userJwtToken){
+            res.send({
+                message: req.cookies.userJwtToken
+            })
+        }else{
+            res.send({message:"Unatzherized"})
+        }
     }
 )
 

@@ -28,6 +28,15 @@ app.use(cookieParser())
 
 app.use('/', authRoutes)
 app.use('/', userRoutes)
+// app.use('/protected', passport.authenticate('jwt', { session: false }),
+// (req, res) => {
+//     console.log(jwtDecode(req.cookies.userJwtToken))
+//     res.send({
+//         message: jwtDecode(req.cookies.userJwtToken)
+//     })
+
+// }
+// )
 
 
 
