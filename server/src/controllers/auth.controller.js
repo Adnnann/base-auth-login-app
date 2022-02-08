@@ -1,21 +1,19 @@
 import jwt from 'jsonwebtoken'
 import expressJwt from 'express-jwt'
-import jwtDecode from 'jwt-decode'
 import User from '../models/user.model'
 import config from '../config/config'
 
 const signin = (req, res) => {
-    
-    User.findOne({'email': req.body.data.email},(err, user) => {
+    User.findOne({'email': req.body.email},(err, user) => {
         if(err || !user){
-            return res.status(401).json('User not found')
+            return res.send({error: 'User not found'})
         }
-        if(!user.authenticate(req.body.data.password)){
-            return res.status(400).json({error: 'Email and password do not match'})
+        if(!user.authenticate(req.body.password)){
+            return res.send({error: 'Email and password do not match'})
         }
         const token = jwt.sign({_id: user._id, email:user.email, name:user.name}, config.secret)
         res.cookie('userJwtToken', token, {expire: new Date()+999, httpOnly:true})
-        res.status(200).json({
+        res.send({
             token,
             user: {_id:user._id, name: user.name, email: user.email}
         })
@@ -24,7 +22,7 @@ const signin = (req, res) => {
 
 const signout = (req, res) => {
     res.clearCookie('userJwtToken')
-    res.status(200).json({message:'User signed out'})
+    res.send({message:'User signed out'})
 }
 
 const requireSignin = expressJwt({

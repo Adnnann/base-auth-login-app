@@ -1,23 +1,39 @@
 import { useEffect } from "react"
-import { getUserPage, userPage } from "../features/usersSlice"
-import { useDispatch, useSelector, useStore } from "react-redux"
-import jwtDecode from 'jwt-decode'
+import { getUserToken, userToken,  getUserSigninData } from "../features/usersSlice"
+import { useDispatch, useSelector} from "react-redux"
+import { useNavigate } from 'react-router';
+import Header from './Header'
+import { Grid} from "@material-ui/core";
+import Item from '@mui/material/Grid';
 
 const Protected = ()=>{
 
     const dispatch = useDispatch()
-    const user = useSelector(getUserPage)
+    const user = useSelector(getUserSigninData)
+    const token = useSelector(getUserToken)
+    const navigate = useNavigate()
 
     useEffect(()=>{
-        dispatch(userPage())
-        console.log(user)
-    },[dispatch])
-
+        dispatch(userToken())
+        if(token === 'Request failed with status code 401'){
+            navigate('/')
+        } 
+    },[dispatch, token.length])
     return(
-        <>
-        <h2>Welcome</h2>
-        <button onClick={()=>console.log(jwtDecode(user.message))}>fefnefnj</button>
-        </>
-    )
+    <>
+     <Header />
+     <Grid container alignItems="center">
+        <Grid item xs={12} md={12} lg={12} xl={12}>
+            <Item>
+                {
+                   Object.keys(user).length !== 0 ?
+                <h1 style={{margin:"0 auto"}}>Welcome {user.user.name}</h1> : 'Loading...'
+                }
+            </Item>
+        </Grid>
+    </Grid>
+   </>
+)
+    
 }
 export default Protected

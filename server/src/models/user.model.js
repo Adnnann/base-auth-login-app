@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     name:{
         type:String,
         unique:true,
-        required:'Username is required',
+        required:'Name is required',
         trim: true,
         validate: nameValidator
     },

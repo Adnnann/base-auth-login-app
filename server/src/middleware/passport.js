@@ -20,26 +20,10 @@ passport.use(new JWTStrategy({
     jwtFromRequest: cookieExtractor,
     secretOrKey: config.secret
 }, (jwtPayload, done) => {
-    //console.log(jwtPayload.sub)
     if(jwtPayload){
         return done(null, jwtPayload)
     }else{
-        return done('Errorfvbfb', null)
+        return done(null, false)
     }
 }))
-//     return User.findById(jwtPayload.sub)
-//     .then(user => {
-//         return done(null, user)
-//     })
-//     .catch(err=>{
-//         return done(err)
-//     })
-// }
-
-
-
-
-
-
-
 
