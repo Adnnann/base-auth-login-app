@@ -21,7 +21,6 @@ const Protected = ()=>{
     const navigate = useNavigate()
     const token = useSelector(getUserToken)
     const userSigninData = useSelector(getUserSigninData)
-    const [userData, setUserData] = useState()
     const [inactiveUser, setInactiveUser] = useState(false)
 
     useEffect(()=>{
