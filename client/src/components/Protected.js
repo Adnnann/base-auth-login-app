@@ -26,13 +26,13 @@ const Protected = ()=>{
 
     useEffect(()=>{
        dispatch(userToken())
-        //getUserData()
         //In case user tried to visit url /protected without token, redirect 
         //to signin page
         if(token === 'Request failed with status code 401'){
             navigate('/')
+            window.location.reload()
         }
-    },[])
+    },[token.length])
 
     //set timeout 
     const timeout = 1200000
