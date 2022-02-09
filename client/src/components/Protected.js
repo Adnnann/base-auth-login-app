@@ -63,15 +63,6 @@ const Protected = ()=>{
         window.location.reload()
     }
 
-    const getUserData = () =>{
-        try{
-            setUserData(jwtDecode(token.message).name)
-        }catch(error){
-            setUserData('Invalid token')
-        }
-    }
-   
-
     return(
     <>
      <Grid container justifyContent="center">
