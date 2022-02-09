@@ -4,7 +4,7 @@ This is simple base login app implemented in node. For authentication jwt token 
 
 ## Important notes
 
-In order to use the app zou shound change in server/config/config.js url for Atlas Mongo DB database and in .env file you should store following data:
+In order to use the app you shound change in server/config/config.js url for Atlas Mongo DB database and in client/.env file you should store following data:
 
 DATABASE=base-login (I will delete this after grading is done)
 PASSWORD=INKKQBsWYt0gdI4W (I will delete this after grading is done)
