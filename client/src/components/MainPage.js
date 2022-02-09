@@ -3,8 +3,7 @@ import { Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles"
 import { useNavigate } from "react-router"
 import Card from '@material-ui/core/Card'
-
-
+import { useEffect } from "react"
 
     const useStyles = makeStyles({
         submit:{
@@ -22,27 +21,29 @@ import Card from '@material-ui/core/Card'
     
     })
     const MainPage = () => {
-        const classes = useStyles()
-        const navigate = useNavigate()
-       
-    
-        const login = () =>{
-           navigate('/login')
-        }
 
-        const signup = () =>{
-            navigate('/signup')
-         }
+    const classes = useStyles()
+    const navigate = useNavigate()
+    
+    const signin = () =>{
+        navigate('/signin')
+    }
+    
+    const signup = () =>{
+        navigate('/signup')
+    }
     
     return(
-        <Card className={classes.card}>
-    <CardActions>
-        <Button color='primary' variant="contained" onClick={login}
-        className={classes.submit}>Login</Button>
-        <Button color='primary' variant="contained" onClick={signup}
-        className={classes.submit}>Signup</Button>
-    </CardActions>
+
+    <Card className={classes.card}>
+        <CardActions>
+            <Button color='primary' variant="contained" onClick={signin}
+            className={classes.submit}>signin</Button>
+            <Button color='primary' variant="contained" onClick={signup}
+            className={classes.submit}>Signup</Button>
+        </CardActions>
     </Card>
+
     )
 }
 

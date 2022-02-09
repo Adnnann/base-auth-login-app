@@ -1,9 +1,6 @@
 import passport from 'passport'
 import passportJwt from 'passport-jwt'
-import User from '../models/user.model'
 import config from '../config/config'
-import jwtDecode from 'jwt-decode'
-
 
 const cookieExtractor = req => {
     let jwt;

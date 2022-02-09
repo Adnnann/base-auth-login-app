@@ -6,18 +6,27 @@ import { signoutUser } from "../features/usersSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
+
 const Header = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    
+    const location = window.location.pathname
 
     const signout = () => {
         dispatch(signoutUser())
         navigate('/')
+        window.location.reload()
     }
     return(
     <AppBar position="static">
         <Toolbar>
-            <Button onClick={signout}>Signout</Button>
+        {
+            location === '/protected' ?
+            <Button onClick={signout} style={{marginLeft:"auto"}}>Signout</Button>
+            :null
+        }
+            
         </Toolbar>
     </AppBar>
     )

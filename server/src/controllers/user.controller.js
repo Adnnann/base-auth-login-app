@@ -27,16 +27,7 @@ const userByID = (req, res, next, id) => {
     })
 }
 
-
-const read = (req, res) => {
-    req.profile.hashed_password = undefined
-    req.profile.salt = undefined
-    console.log(req.profile)
-    res.status(200).json(req.profile)
-}
-
 export default {
     create,
-    userByID,
-    read
+    userByID
 }

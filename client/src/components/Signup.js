@@ -16,7 +16,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUser, createUser } from "../features/usersSlice"
 import { useNavigate } from "react-router"
 
-
 const useStyles = makeStyles(theme=>({
     card:{
         maxWidth: 600,
@@ -70,22 +69,25 @@ const Signup = () =>{
             repeatPassword: values.repeatPassword || undefined
             
         }
-        dispatch(createUser(user))
-
-        if(!values.repeatPassword || values.repeatPassword == ''){
+        
+        if(!values.repeatPassword || values.repeatPassword === ''){
             setValues({...values, error: 'Please repeat your password'})
+            return
         }else if(values.password !== values.repeatPassword){
             setValues({...values, error: 'Password do not match'})
+            return
         }else{
             setValues({...values, error: ''})
         }
+
+        dispatch(createUser(user))
        
         if(userData.hasOwnProperty('message')){
             setValues({...values, error: '', open:true})
         }
     }
-    const redirectToLogin = () =>{
-        navigate('/login')
+    const redirectTosignin = () =>{
+        navigate('/signin')
     }
     return(
         <div>
@@ -138,7 +140,7 @@ const Signup = () =>{
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                        <Button color="primary" autoFocus="autoFocus" onClick={redirectToLogin}>Sign In</Button>
+                        <Button color="primary" autoFocus="autoFocus" onClick={redirectTosignin}>Sign In</Button>
                 </DialogActions>
             </Dialog>
         </div>

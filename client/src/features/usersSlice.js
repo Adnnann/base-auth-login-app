@@ -28,7 +28,7 @@ export const signoutUser = createAsyncThunk('users/user', async()=>{
 })
 
 export const userToken = createAsyncThunk('users/protected', async()=>{
-  return axios.get('/protected', { 
+  return await axios.get('/protected', { 
     headers:{
       'Content-Type': 'application/x-www-form-urlencoded'
     }

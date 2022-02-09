@@ -17,28 +17,9 @@ app.use(cors())
 app.use(helmet())
 app.use(passport.initialize())
 app.use(cookieParser())
-//app.use(passportJwt())
-
-// const genToken = user => {
-//     return jwt.sign({
-//         iss: ''
-//     })
-// }
-
 
 app.use('/', authRoutes)
 app.use('/', userRoutes)
-// app.use('/protected', passport.authenticate('jwt', { session: false }),
-// (req, res) => {
-//     console.log(jwtDecode(req.cookies.userJwtToken))
-//     res.send({
-//         message: jwtDecode(req.cookies.userJwtToken)
-//     })
-
-// }
-// )
-
-
 
 app.use((err, req, res, next) => {
     if(err.name === 'UnauthorizedError'){

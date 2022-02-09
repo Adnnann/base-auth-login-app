@@ -5,11 +5,11 @@ import './App.css';
 
 function App() {
 
+  const location = window.location.pathname
 
   return (
     <>
-    
-    <MainRouter />
+    <MainRouter location={location} />
     </>
   );
 }

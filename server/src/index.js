@@ -1,7 +1,7 @@
 import config from './config/config'
 import app from './app'
 import mongoose from 'mongoose'
-import mongooseUniqueValidator from 'mongoose-unique-validator'
+
 
 app.listen(config.port, err=>{
     if(err) console.log(err)
