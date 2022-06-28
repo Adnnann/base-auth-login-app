@@ -1,6 +1,6 @@
 # Description
 
-This is simple base login app implemented in node. For authentication jwt token is used. Token is stored in httponly cookie and validation on protected user page is done with passport and passport-jwt strategy. For storing data Atlas MonggoDB is used. Validation of user data is done with moongose-validator and moongose-unique-validator
+This is simple login app implemented in node. For authentication jwt token is used. Token is stored in httponly cookie and validation on protected user page is done with passport and passport-jwt strategy. For storing data Atlas MonggoDB is used. Validation of user data is done with moongose-validator and moongose-unique-validator
 
 ## Important notes
 
