@@ -2,12 +2,13 @@ require('dotenv').config();
 
 const password = process.env.PASSWORD
 const database = process.env.DATABASE
+const user = process.env.USER
 
 
 const config = {
     port: process.env.PORT || 5000,
     secret: process.env.JWT_SECRET || 'ay+5M9*85&B8W*zp',
-    mongo: process.env.MONGO || `mongodb+srv://aovcina:${password}@cluster0.hbhrs.mongodb.net/${database}?retryWrites=true&w=majority`
+    mongo: process.env.MONGO || `mongodb+srv://${user}:${password}@cluster0.hbhrs.mongodb.net/${database}?retryWrites=true&w=majority`
 }
 
 export default config;
